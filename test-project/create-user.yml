@@ -1,0 +1,13 @@
+---
+- name: 'Create new users'
+  hosts: all
+  tasks:
+    - user: 
+         name: '{{ item }}'
+      loop: 
+        - devops-user
+        - natalie
+        - grant
+      state: present
+
+

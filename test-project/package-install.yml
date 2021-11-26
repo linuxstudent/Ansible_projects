@@ -1,0 +1,24 @@
+-
+    name: 'Install required packages'
+    hosts: all
+    vars:
+        packages:
+            - httpd
+            - binutils
+            - glibc
+            - ksh
+            - libaio
+            - libXext
+            - gcc
+            - make
+            - sysstat
+            - unixODBC
+            - nodejs
+            - mariadb-server
+            - kernel-core-4.18.0-348.2.1.el8_5.x86_64
+    tasks:
+        -
+            name: " {{ packages }}"
+            yum: 'name={{packages}} state=present'
+            remote_user: root
+            

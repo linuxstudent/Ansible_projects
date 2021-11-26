@@ -1,0 +1,33 @@
+--- 
+- hosts: all
+  name: "Install a list of packages"
+  remote_user: root
+  tasks: 
+    - 
+      name: "Install a list of packages (suitable replacement for 2.11 loop deprecation warning)"
+      yum: 
+        name: 
+           - nginx
+           - postgresql
+           - postgresql-server
+        state: present
+
+- name: Update target servers to latest version
+  hosts: all
+  remote_user: root
+  tasks:
+  - name: Update all installed packages using YUM module
+    yum:
+      name: '*'
+      state: latest
+      update_cache: yes
+      update_only: yes
+    register: yum_update_status
+
+- name: Create a new user
+  hosts: all
+  tasks: 
+    - name: 
+      user:
+        name: web_user
+        uid: 1040
